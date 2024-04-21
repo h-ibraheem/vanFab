@@ -1,5 +1,5 @@
 export default function reviews (){
     return (
-        <h1>Hello, from Reviews</h1>
+        <h1>Hello, from Reviews </h1>
     )
 }
