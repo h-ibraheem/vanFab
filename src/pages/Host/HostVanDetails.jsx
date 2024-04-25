@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, Outlet, NavLink } from "react-router-dom";
 
 export default function HostVanDetails() {
   const { id } = useParams();
@@ -17,6 +17,10 @@ export default function HostVanDetails() {
 
   return (
     <section>
+      <Link to=".." relative="path" className="back-button">
+        &larr; <span>Back to all Vans</span>
+      </Link>
+
       <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
           <img src={currentVan.imageUrl} />
@@ -28,6 +32,33 @@ export default function HostVanDetails() {
             <h4>${currentVan.price}/day</h4>
           </div>
         </div>
+
+        <nav className="host-van-detail-nav">
+          <NavLink
+            className={({ isActive }) => (isActive ? "active-link" : null)}
+            to="."
+            end
+            relative="path"
+          >
+            Details
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) => (isActive ? "active-link" : null)}
+            to="priceing"
+          >
+            Pricing
+          </NavLink>
+
+          <NavLink
+            className={({ isActive }) => (isActive ? "active-link" : null)}
+            to="photos"
+          >
+            Photos
+          </NavLink>
+        </nav>
+
+        <Outlet context={{currentVan}} />
       </div>
     </section>
   );
