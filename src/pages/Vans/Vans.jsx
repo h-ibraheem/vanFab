@@ -6,13 +6,10 @@ import { getVans } from "../../api";
 export function loader() {
   return getVans();
 }
-
 export default function Vans() {
-
   const [searchParams, setSearchParams] = useSearchParams();
   const [error, setError] = React.useState(null);
   const vans = useLoaderData();
-   
   const typeFilter = searchParams.get("type");
 
   const displayedVans = typeFilter

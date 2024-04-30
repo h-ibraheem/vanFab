@@ -1,15 +1,14 @@
-import React from "react";
-import { useParams, Link, Outlet, NavLink } from "react-router-dom";
+import { Link, Outlet, NavLink, useLoaderData } from "react-router-dom";
+import { getHostVans } from "../../api";
+import { requireAuth } from "../../utils";
+
+export async function loader({ params }) {
+  await requireAuth();
+  return getHostVans(params.id);
+}
 
 export default function HostVanDetails() {
-  const { id } = useParams();
-  const [currentVan, setCurrentVan] = React.useState(null);
-
-  React.useEffect(() => {
-    fetch(`/api/host/vans/${id}`)
-      .then((res) => res.json())
-      .then((data) => setCurrentVan(data.vans));
-  }, []);
+  const currentVan = useLoaderData();
 
   if (!currentVan) {
     return <h1>Loading...</h1>;
@@ -20,7 +19,6 @@ export default function HostVanDetails() {
       <Link to=".." relative="path" className="back-button">
         &larr; <span>Back to all Vans</span>
       </Link>
-
       <div className="host-van-detail-layout-container">
         <div className="host-van-detail">
           <img src={currentVan.imageUrl} />
@@ -45,7 +43,7 @@ export default function HostVanDetails() {
 
           <NavLink
             className={({ isActive }) => (isActive ? "active-link" : null)}
-            to="priceing"
+            to="pricing"
           >
             Pricing
           </NavLink>
@@ -58,7 +56,7 @@ export default function HostVanDetails() {
           </NavLink>
         </nav>
 
-        <Outlet context={{currentVan}} />
+        <Outlet context={{ currentVan }} />
       </div>
     </section>
   );
