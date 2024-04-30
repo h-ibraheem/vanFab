@@ -13,7 +13,7 @@ import VanDetail, { loader as vanDetailLoader } from "./pages/Vans/VanDetails";
 import Dashboard from "./pages/Host/Dashboard";
 import Income from "./pages/Host/Income";
 import Reviews from "./pages/Host/Reviews";
-import Login from "./pages/Login";
+import Login from "./components/Login";
 
 import HostVans, { loader as hostVan } from "./pages/Host/HostVans";
 import HostVanDetails, {
@@ -43,7 +43,7 @@ const router = createBrowserRouter(
         errorElement={<Error />}
         loader={vanLoader}
       />
-      <Route path="vans/:id" element={<VanDetail />} />
+      <Route path="vans/:id" element={<VanDetail />} loader={vanDetailLoader} />
 
       <Route path="host" element={<HostLayout />}>
         <Route
