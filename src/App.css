@@ -517,5 +517,9 @@ a.active-link {
     color: white;
     font-family: "Inter", sans-serif;
     font-size: 18px;
+    cursor: pointer;
 }
 
+.red {
+    color: #cc0000;
+}
